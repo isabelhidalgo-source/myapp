@@ -6,6 +6,12 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+
+    alias(libs.plugins.kotlinSerialization)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 kotlin {
@@ -29,6 +35,18 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+
+            // Optional when using Room SQLite Wrapper
+            implementation(libs.androidx.room.sqlite.wrapper)
+
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.config)
+            implementation(libs.firebase.database)
+            implementation(libs.firebase.messaging)
+            implementation(libs.kotlinx.coroutines.play.services)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -39,6 +57,17 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+
+            //koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.serialization.json)
+
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -74,6 +103,16 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.messaging)
     debugImplementation(libs.compose.uiTooling)
+
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    // Add any other platform target you use in your project, for example kspDesktop
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
