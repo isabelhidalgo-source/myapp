@@ -1,0 +1,5 @@
+<resources>
+    <string name="github_find">Find</string>
+    <string name="github_title">Find your Github Avatar</string>
+    <string name="github_text_hint">GitHub username</string>
+</resources>

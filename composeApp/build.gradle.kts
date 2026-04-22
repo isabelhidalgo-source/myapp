@@ -47,6 +47,12 @@ kotlin {
             implementation(libs.firebase.database)
             implementation(libs.firebase.messaging)
             implementation(libs.kotlinx.coroutines.play.services)
+
+            implementation(libs.androidx.work.runtime.ktx)
+
+            implementation(libs.ktor.client.okhttp)
+
+            implementation("com.karumi:dexter:6.2.3")
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -68,6 +74,20 @@ kotlin {
 
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
+
+            implementation(project(":designsystem"))
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
+            // Coil
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
+
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
